@@ -1,0 +1,56 @@
+
+CREATE TABLE usuarios (
+    usuario VARCHAR(30) PRIMARY KEY,
+    clave VARCHAR(30)
+);
+
+
+CREATE TABLE Dueños (
+    id_dueño INT AUTO_INCREMENT PRIMARY KEY,
+    cedula VARCHAR(20),
+    nombre VARCHAR(100),
+    telefono VARCHAR(15),
+    email VARCHAR(100),
+    direccion VARCHAR(255)
+);
+
+-- Tabla para los animales
+CREATE TABLE Animales (
+    id_animal INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_animal VARCHAR(100),
+    especie VARCHAR(50),
+    raza VARCHAR(50),
+    edad INT,
+    id_dueño INT,
+    FOREIGN KEY (id_dueño) REFERENCES Dueños(id_dueño) ON DELETE CASCADE
+);
+
+-- Tabla para las citas
+CREATE TABLE Citas (
+    id_cita INT AUTO_INCREMENT PRIMARY KEY,
+    fecha DATE,
+    hora TIME,
+    motivo VARCHAR(255),
+    id_animal INT,
+    FOREIGN KEY (id_animal) REFERENCES Animales(id_animal) ON DELETE CASCADE
+);
+
+-- Insertar algunos datos de ejemplo en Dueños
+INSERT INTO Dueños (nombre, cedula, telefono, email, direccion) VALUES
+('Juan Pérez', '1097182445','5551234567', 'juan.perez@gmail.com', 'Calle Falsa 123'),
+('Ana Gómez', '109718244','5559876543', 'ana.gomez@yahoo.com', 'Avenida Central 456');
+
+-- Insertar algunos datos de ejemplo en Animales
+INSERT INTO Animales (nombre_animal, especie, raza, edad, id_dueño) VALUES
+('Firulais', 'Perro', 'Labrador', 5, 1),
+('Michi', 'Gato', 'Siames', 3, 2);
+
+-- Insertar algunos datos de ejemplo en Citas
+INSERT INTO Citas (fecha, hora, motivo, id_animal) VALUES
+('2024-11-25', '10:30:00', 'Consulta general', 1),
+('2024-11-26', '15:00:00', 'Vacunación', 2);
+
+
+
+INSERT INTO usuarios (usuario, clave)
+VALUES ('saleman','2302');
